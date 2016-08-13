@@ -15,6 +15,13 @@ import java.awt.Graphics;
  * Makes a battleship object
  */
 
+/**
+ * TO DO LIST
+ * SHIP SPEED IS MULTIPLIED BY 2 FOR SOME WEIRD REASON, SHIPS MOVE AT TWICE THE GIVEN SPEED
+ * HIT MARKER/CONDITION IS VERY BUGGY, LOOK INTO IT
+ * @author alexp
+ */
+
 
 public class Battleship {
     public static final String north = "north";
