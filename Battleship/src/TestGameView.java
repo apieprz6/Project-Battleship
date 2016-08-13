@@ -27,7 +27,7 @@ public class TestGameView extends JPanel{
        Pattern rect = new Rectangle(1, 1, 6, 6);
        Pattern rect2 = new Rectangle(1,15, 6, 6);
 //        //System.out.println(rect.toString());
-        Battleship battle = new Battleship(6, 7, rect, 1, 1);
+        Battleship battle = new Battleship(6, 2, rect, 1, 1);
         Battleship battle2 = new Battleship(3,3,rect2,1,15);
 //        //System.out.println(battle.getOrientation() + "\n" + "move");
 //        int[][] gameBoard = new int[30][30];

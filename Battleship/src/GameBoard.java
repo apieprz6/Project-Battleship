@@ -24,13 +24,14 @@ public class GameBoard {
     private ArrayList<Battleship> ships = new ArrayList<>();
     private int[][] gameBoard = new int[length][width];
     private int[][] patterns = new int[length][width];
+    public static int moveCount = 0;
     
     public GameBoard(ArrayList<Battleship> ships){
         this.ships = ships;
         for(int i=0; i<ships.size();i++){
             int tempSpeed = ships.get(i).getSpeed();
             ships.get(i).setSpeed(0);
-            System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
+            //System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
             gameBoard = ships.get(i).move(gameBoard);
             ships.get(i).setSpeed(tempSpeed);
             int temp[][] = ships.get(i).getPattern().getPatternOnBoard();
@@ -57,10 +58,14 @@ public class GameBoard {
     }
     
     public void drawBoard(Graphics g){
+        for(int i=0; i<ships.size(); i++){
+           gameBoard = ships.get(i).move(gameBoard);
+           System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
+        }
         g.setColor(Color.RED);
         for(int r=0;r<patterns.length;r++){
             for(int c=0;c<patterns[r].length;c++){
-                System.out.println(patterns[r][c] + " ");
+                System.out.print(patterns[r][c] + " ");
                 if(patterns[r][c] == 1){
                     g.fillRect(c*boardSpacing, r*boardSpacing,boardSpacing,boardSpacing);
                 }
