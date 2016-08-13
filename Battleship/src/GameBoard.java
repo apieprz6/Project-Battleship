@@ -60,25 +60,30 @@ public class GameBoard {
                 System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
             }
         }
-        g.setColor(Color.RED);
         for (int r = 0; r < patterns.length; r++) {
             for (int c = 0; c < patterns[r].length; c++) {
                 System.out.print(patterns[r][c] + " ");
                 if (patterns[r][c] == 1) {
+                    g.setColor(Color.BLUE);
                     g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
                 }
             }
             System.out.println();
         }
-        System.out.println();
-        g.setColor(Color.BLACK);
+        System.out.println();    
         for (int r = 0; r < length; r++) {
+            g.setColor(Color.BLACK);
             g.drawLine(r * boardSpacing, 0, r * boardSpacing, 600);
             for (int c = 0; c < width; c++) {
                 g.drawLine(0, c * boardSpacing, 600, c * boardSpacing);
                 //HAVE IT DRAW RECTANGLES AT EVERY 1;
                 System.out.print(gameBoard[r][c] + " ");
                 if (gameBoard[r][c] == 1) {
+                    g.setColor(Color.BLACK);
+                    g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
+                }
+                else if(gameBoard[r][c] == 2){
+                    g.setColor(Color.RED);
                     g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
                 }
             }

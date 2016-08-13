@@ -85,12 +85,13 @@ public class Battleship {
         this.col = col;
     }
     
+    public void setConditionOfShip(int[] array){
+        conditionOfShip = array;
+    }
     
     public void drawSetUp(int y,int x,Graphics g){
         g.setColor(Color.BLACK);
         g.drawRect(x, y, 10, 10*size);
-        
-        
     }
     
     public void drawGame(Graphics g){
@@ -155,7 +156,7 @@ public class Battleship {
                     }
                 }
                 for(int j=0; j<up;j++){ //same with comment above
-                    if(conditionOfShip[size-up]==1){
+                    if(conditionOfShip[size-up]==1){//possibly add  && (size-up)!=0 to make ship not go all red at corners
                         gameBoard[row-j][startC]=2;
                     }
                     else{
@@ -164,46 +165,79 @@ public class Battleship {
                 }   
             }
         }
-        if(orientation.equals(north)){
+        if(orientation.equals(north)){//HIT CONDITION DONE
             if(row+size<=startR+lengthOfPattern){
-                for(int i=0;i<size;i++)
-                    gameBoard[row+i][col]=1;
+                for(int i=0;i<size;i++){
+                    if(conditionOfShip[i] == 1)
+                        gameBoard[row+i][col]=2;
+                    else
+                        gameBoard[row+i][col]=1;
+                }
             }
             else{
                 int left=(row+size)-(startR+lengthOfPattern);
-                for(int i=0;i<=size-left;i++)
-                    gameBoard[row+i][col]=1;
-                for(int j=0;j<left;j++)
-                    gameBoard[startR + lengthOfPattern][col-j]=1;
+                for(int i=0;i<=size-left;i++){
+                    if(conditionOfShip[i] ==1)
+                        gameBoard[row+i][col]=2;
+                    else
+                        gameBoard[row+i][col]=1;
+                }
+                for(int j=0;j<left;j++){
+                    if(conditionOfShip[size-left]==1)
+                        gameBoard[startR + lengthOfPattern][col-j]=2;
+                    else
+                        gameBoard[startR + lengthOfPattern][col-j]=1;
+                }
             }
         }
-        if(orientation.equals(west)){//FIXED
+        if(orientation.equals(west)){//HIT CONDITION DONE
             if((col+size)<=(startC+widthOfPattern)){
-                for(int i=0;i<size;i++)
-                    gameBoard[row][col+i]=1;
+                for(int i=0;i<size;i++){
+                    if(conditionOfShip[i]==1)
+                        gameBoard[row][col+i]=2;
+                    else
+                        gameBoard[row][col+i]=1;
+                }
 
             }
-            else{//FIXED
+            else{
                 int down=(col+size)-(startC+widthOfPattern);
-                for(int i=0;i<size-down;i++)
-                    gameBoard[row][col+i]=1;
-                for(int j=0;j<down;j++)
-                    gameBoard[row+j][startC+widthOfPattern]=1; 
+                for(int i=0;i<size-down;i++){
+                    if(conditionOfShip[i] == 1)
+                        gameBoard[row][col+i]=2;
+                    else
+                        gameBoard[row][col+i]=1;
+                }
+                for(int j=0;j<down;j++){
+                    if(conditionOfShip[size-down] ==1)
+                        gameBoard[row+j][startC+widthOfPattern]=2;
+                    else
+                        gameBoard[row+j][startC+widthOfPattern]=1;
+                } 
             }            
         }
-        if(orientation.equals(south)){//FIXED
+        if(orientation.equals(south)){//HIT CONDITION DONE
             if(row-size>=startR){
                 for(int i=0;i<size;i++){
-                    gameBoard[row-i][col]=1;
+                    if(conditionOfShip[i] == 1)
+                        gameBoard[row-i][col]=2;
+                    else
+                        gameBoard[row-i][col]=1;
                 }
             }
             else{
                 int right= startR - (row-size);
                 for(int i=0;i<size-right;i++){
-                    gameBoard[row-i][col]=1;
+                    if(conditionOfShip[i] == 1)
+                        gameBoard[row-i][col]=2;
+                    else
+                        gameBoard[row-i][col]=1;
                 }
                 for(int j=0;j<right;j++){
-                    gameBoard[startR][col+j]=1;
+                    if(conditionOfShip[size-right] == 1)
+                        gameBoard[startR][col+j]=2;
+                    else
+                        gameBoard[startR][col+j]=1;
                 }
 
             }
