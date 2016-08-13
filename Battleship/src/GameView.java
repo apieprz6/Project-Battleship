@@ -34,7 +34,6 @@ public class GameView extends javax.swing.JPanel {
     
     public void update(){
         repaint();
-       
     }
 
     public void paintComponent(Graphics g){
