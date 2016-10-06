@@ -163,7 +163,7 @@ public class Battleship {
                     }
                 }
                 for(int j=0; j<up;j++){ //same with comment above
-                    if(conditionOfShip[size-up]==1){//possibly add  && (size-up)!=0 to make ship not go all red at corners
+                    if(conditionOfShip[(size-up)+j]==1){//possibly add  && (size-up)!=0 to make ship not go all red at corners
                         gameBoard[row-j][startC]=2;
                     }
                     else{
@@ -190,7 +190,7 @@ public class Battleship {
                         gameBoard[row+i][col]=1;
                 }
                 for(int j=0;j<left;j++){
-                    if(conditionOfShip[size-left]==1)
+                    if(conditionOfShip[size-left+j]==1)
                         gameBoard[startR + lengthOfPattern][col-j]=2;
                     else
                         gameBoard[startR + lengthOfPattern][col-j]=1;
@@ -216,7 +216,7 @@ public class Battleship {
                         gameBoard[row][col+i]=1;
                 }
                 for(int j=0;j<down;j++){
-                    if(conditionOfShip[size-down] ==1)
+                    if(conditionOfShip[size-down+j] ==1)
                         gameBoard[row+j][startC+widthOfPattern]=2;
                     else
                         gameBoard[row+j][startC+widthOfPattern]=1;
@@ -241,7 +241,7 @@ public class Battleship {
                         gameBoard[row-i][col]=1;
                 }
                 for(int j=0;j<right;j++){
-                    if(conditionOfShip[size-right] == 1)
+                    if(conditionOfShip[size-right+j] == 1)
                         gameBoard[startR][col+j]=2;
                     else
                         gameBoard[startR][col+j]=1;
