@@ -1,6 +1,8 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -13,20 +15,38 @@ import javax.swing.JFrame;
 /**
  *
  * @author alexpieprzycki
+ * THIS FILE HOUSES MOUSE LISTENERS
+ * Mouse stuff:
+ *      The listeners here collect mouse data
+ *      Then the mouse data is sent off to the right method where magic happens.
+ *      Ex. Mouse motion listener sends mouse position to gameboard
  */
-public class GameView extends javax.swing.JPanel {
+public class GameView extends javax.swing.JPanel implements MouseMotionListener{
     
     private static ArrayList<Battleship> list;
     private GameBoard game1;
     private static JFrame frame;
+    private int x = 0;
+    private int y = 0;
+    private long clickCount = 0;
+    private long clickCountOld = 0;
     /**
      * Creates new form GameView
      */
+    
     public GameView(ArrayList<Battleship> battle) {
         list = battle;
+        addMouseMotionListener(this);
         initComponents();
     }
-    
+    public void mouseMoved(MouseEvent e){//Might need to create a sensitivity range (so like the mouse needs to move a couple pixels for listener to pick up)
+        x = e.getX();
+        y = e.getY();
+        repaint();
+    }
+    public void mouseDragged (MouseEvent e){
+        
+    }
     public void addShip(Battleship battle){
         list.add(battle);
         repaint();
@@ -37,16 +57,15 @@ public class GameView extends javax.swing.JPanel {
     }
 
     public void paintComponent(Graphics g){
+        //System.out.println("hi");
         super.paintComponent(g);
-//         Pattern rect = new Rectangle(1, 1, 6, 6);
-//        
-//        //System.out.println(rect.toString());
-//        Battleship battle = new Battleship(3, 1, rect, 1, 1);
-//        //Battleship battle2 = new Battleship()
-//        int[][] gameBoard = new int[30][30];
-//        list.add(battle);
-        game1 = new GameBoard(list);
-        game1.drawBoard(g);
+        System.out.println(x + y);
+        game1 = new GameBoard(list,x,y);
+        game1.drawMouseMovement(g);
+        if(clickCount != clickCountOld){
+            game1.drawBoard(g);
+            clickCountOld++;
+        }
         
     }
     
@@ -95,6 +114,7 @@ public class GameView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        clickCount++;
         update();
     }//GEN-LAST:event_jButton1ActionPerformed
 

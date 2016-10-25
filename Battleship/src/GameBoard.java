@@ -21,9 +21,13 @@ public class GameBoard {
     private int[][] gameBoard = new int[length][width];
     private int[][] patterns = new int[length][width];
     private static long drawCount = 0;
+    private int mouseX = 0;
+    private int mouseY = 0;
 
-    public GameBoard(ArrayList<Battleship> ships) {
+    public GameBoard(ArrayList<Battleship> ships, int x, int y) {
         this.ships = ships;
+        mouseX=x;
+        mouseY=y;
         for (int i = 0; i < ships.size(); i++) {
             int tempSpeed = ships.get(i).getSpeed();
             ships.get(i).setSpeed(0);
@@ -57,7 +61,7 @@ public class GameBoard {
         if (drawCount != 0) {
             for (int i = 0; i < ships.size(); i++) {
                 gameBoard = ships.get(i).move(gameBoard);
-                System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
+                //System.out.println("Speed: " + ships.get(i).getSpeed() + " Row: " + ships.get(i).getRow() + " Col: " + ships.get(i).getCol());
             }
         }
         for (int r = 0; r < patterns.length; r++) {
@@ -77,7 +81,7 @@ public class GameBoard {
             for (int c = 0; c < width; c++) {
                 g.drawLine(0, c * boardSpacing, 600, c * boardSpacing);
                 //HAVE IT DRAW RECTANGLES AT EVERY 1;
-                System.out.print(gameBoard[r][c] + " ");
+                System.out.print(gameBoard[r][c] + " "); 
                 if (gameBoard[r][c] == 1) {
                     g.setColor(Color.BLACK);
                     g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
@@ -91,6 +95,40 @@ public class GameBoard {
         }
         System.out.println("Draw Count = " + drawCount);
         drawCount++;
+    }
+    public void drawMouseMovement(Graphics g){
+        for (int r = 0; r < patterns.length; r++) {
+            for (int c = 0; c < patterns[r].length; c++) {
+                System.out.print(patterns[r][c] + " ");
+                if (patterns[r][c] == 1) {
+                    g.setColor(Color.BLUE);
+                    g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();    
+        for (int r = 0; r < length; r++) {
+            g.setColor(Color.BLACK);
+            g.drawLine(r * boardSpacing, 0, r * boardSpacing, 600);
+            for (int c = 0; c < width; c++) {
+                g.drawLine(0, c * boardSpacing, 600, c * boardSpacing);
+                //HAVE IT DRAW RECTANGLES AT EVERY 1;
+                System.out.print(gameBoard[r][c] + " "); 
+                if (gameBoard[r][c] == 1) {
+                    g.setColor(Color.BLACK);
+                    g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
+                }
+                else if(gameBoard[r][c] == 2){
+                    g.setColor(Color.RED);
+                    g.fillRect(c * boardSpacing, r * boardSpacing, boardSpacing, boardSpacing);
+                }
+            }
+        }
+        if(mouseX<=width*boardSpacing && mouseY<=length*boardSpacing){
+            g.setColor(Color.RED);
+            g.fillRect((mouseX/boardSpacing)*boardSpacing, (mouseY/boardSpacing)*boardSpacing, boardSpacing, boardSpacing);
+        }
     }
 
 }

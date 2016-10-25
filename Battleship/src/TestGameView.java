@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,9 +20,10 @@ import javax.swing.JPanel;
 
 
 
-public class TestGameView extends JPanel{
+public class TestGameView extends JPanel {
     
     private static JFrame frame;
+    
     
 
     public static void main(String[] args) {

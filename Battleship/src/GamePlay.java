@@ -20,8 +20,8 @@ public class GamePlay extends javax.swing.JFrame {
      */
     public GamePlay(ArrayList<Battleship> uList, ArrayList<Battleship> cList ) {
         initComponents();
-        uList=this.uList;
-        cList=this.cList;
+        this.uList= uList;
+        this.cList = cList;
     }
 
     /**
